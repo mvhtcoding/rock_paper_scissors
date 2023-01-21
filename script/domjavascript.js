@@ -2,17 +2,23 @@ let computerPoints = 0;
 let playerPoints = 0;
 let playerSelection;
 let computerSelection;
+let roundWinner = document.querySelector('.roundWinner')
+let playerScore = document.querySelector('.playerScore')
+let computerScore = document.querySelector('.computerScore')
+let playerImage = document.querySelector('.playerImage')
+let computerImage = document.querySelector('.computerImage')
+
 
 const buttons = document.querySelectorAll('button.btn');
 buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    playerSelection = button.id;
-    computerSelection = getComputerChoice();
-    game();
-  });
+    button.addEventListener('click', () => {
+        playerSelection = button.id;
+        playerImage.innerHTML = `<img src='img/${playerSelection}.png' alt='${playerSelection} image'/>`
+        computerSelection = getComputerChoice();
+        computerImage.innerHTML = `<img src='img/${computerSelection}.png' alt='${computerSelection} image'/>`
+        game();
+    });
 });
-
-console.log(playerSelection)
 
 function getComputerChoice() {
     let computerChoice = '';
@@ -30,31 +36,37 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-
-
-
 function playRound(playerSelection, computerSelection) {
-   
+
 
     if (playerSelection === computerSelection) {
-        console.log('its a tie');
+        roundWinner.textContent = 'It\'s a tie';
     } else if ((playerSelection === 'rock' && computerSelection === 'scissors') ||
         (playerSelection === 'paper' && computerSelection === 'rock') ||
         (playerSelection === 'scissors' && computerSelection === 'paper')) {
         playerPoints++;
-        console.log(`${playerSelection} beats ${computerSelection}, player wins and has ${playerPoints} points`)
+        roundWinner.textContent = 'You win!';
+        playerScore.textContent = `Player: ${playerPoints}`
+
     } else {
         computerPoints++;
-        console.log(`${computerSelection} beats ${playerSelection}, computer wins and has ${computerPoints} points`)
+        roundWinner.textContent = 'Computer wins';
+        computerScore.textContent = `Computer: ${computerPoints}`;
 
     }
 
 
 }
 
-
-
 function game() {
-        playRound(playerSelection, computerSelection)
+
+    if (playerPoints === 5 || computerPoints === 5) {
+        alert('Game over')
+        window.location.reload();
+
+    } else {
+
+    playRound(playerSelection, computerSelection)
+    }
+    
 }
-game();

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,25 @@
     <title>Document</title>
     <link rel="stylesheet" href="style/stylesheet.css">
 </head>
+
 <body>
     <header>
         <h1>Rock Paper Scissors</h1>
     </header>
 
     <main>
-        <div class="game"></div>
+        <div class="gamecontainer">
+            <div class="upper">
+                <div class="playerScore">Player: 0</div>
+                <div class="roundWinner"></div>
+                <div class="computerScore">Computer: 0</div>
+            </div>
+            <div class="lower">
+                <div class="playerImage">?</div>
+                <div class="vs">VS</div>
+                <div class="computerImage">?</div>
+            </div>
+        </div>
 
         <div class="btnscontainer">
             <button class="btn" id="rock"><img src="img/rock.png" alt="rock image"></button>
@@ -23,4 +36,5 @@
     </main>
     <script src="script/domjavascript.js"></script>
 </body>
+
 </html>
