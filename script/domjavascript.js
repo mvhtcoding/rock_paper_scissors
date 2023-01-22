@@ -8,7 +8,12 @@ let computerScore = document.querySelector('.computerScore');
 let playerImage = document.querySelector('.playerImage');
 let computerImage = document.querySelector('.computerImage');
 let buttons = document.querySelectorAll('button.btn');
+const modal = document.querySelector('.modal');
+const overlay = document.querySelector('.overlay');
+const closeModalBtn = document.querySelector('.btn-close');
+let modalText = document.querySelector('.modalText')
 
+//Checks button that is clicked and puts clicked item and computer choice img on playground
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         playerSelection = button.id;
@@ -19,6 +24,7 @@ buttons.forEach((button) => {
     });
 });
 
+// function to get computers choice
 function getComputerChoice() {
     let computerChoice = '';
     const randomChoice = Math.floor(Math.random() * 3)
@@ -35,6 +41,7 @@ function getComputerChoice() {
     return computerChoice;
 }
 
+// playround function that checks wether or not player or computer has 5 points and pops up modal box
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         roundWinner.textContent = 'It\'s a tie';
@@ -45,17 +52,32 @@ function playRound(playerSelection, computerSelection) {
         roundWinner.textContent = 'You win!';
         playerScore.textContent = `Player: ${playerPoints}`
         if (playerPoints === 5) {
-            alert('Congratulations! U win the best of 5, care for a rematch?');
-            window.location.reload();
+           openModal();
+           modalText.textContent = 'Congratulations! U win the best of 5!';
         }
     } else {
         computerPoints++;
         roundWinner.textContent = 'Computer wins';
         computerScore.textContent = `Computer: ${computerPoints}`;
         if (computerPoints === 5) {
-            alert('Game over! The computer wins, better luck next time!');
-            window.location.reload();
+            openModal();
+            modalText.textContent = 'Game over! Computer wins the best of 5';
         }
     }
 }
 
+// close modal function
+function closeModal() {
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
+  window.location.reload()
+};
+
+// close the modal when the close button is clicked
+closeModalBtn.addEventListener('click', closeModal);
+
+// open modal function
+function openModal() {
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+};
