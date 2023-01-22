@@ -101,7 +101,7 @@ header h1 {
 }
 
 
-/* Modal css */
+/* Modal box css */
 .modal {
     display: flex;
     flex-direction: column;
